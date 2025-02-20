@@ -32,7 +32,7 @@ export function AppRouting() {
             <Route
               key="homepage"
               path={appRoutesObj.getBasePath()}
-              element={withSuspense(<App />)} 
+              element={withSuspense(<App />)}
             />
             <Route
               key="userpage"

@@ -262,7 +262,6 @@ const Contact = () => {
 };
 
 export default Contact;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handleRequestError(error: unknown) {
   throw new Error("Function not implemented.");
 }

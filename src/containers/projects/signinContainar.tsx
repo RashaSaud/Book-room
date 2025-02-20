@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Formik, useFormik } from "formik";
 import { motion } from "framer-motion";
 import { useState } from "react";

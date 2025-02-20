@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
