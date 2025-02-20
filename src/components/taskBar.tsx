@@ -5,19 +5,21 @@ import { BsDownload } from "react-icons/bs";
 import { HiChevronDown } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { baseUrl } from "src/core/static/static";
-
+import { useAuth } from "src/auth/user-context";
 interface TaskBarComponentProp {
   handleToggle: () => void;
   Ground: boolean;
 }
 function TaskBarComponent(props: TaskBarComponentProp) {
   const [data, setData] = useState<any>([]);
+  const { userData } = useAuth();
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const response = await axios.get(`${baseUrl}/get-all-booking`);
         setData(response.data); // Type casting for safety
+        console.log(userData);
       } catch (error) {
         //
       }
@@ -101,15 +103,17 @@ function TaskBarComponent(props: TaskBarComponentProp) {
             <IoMdNotificationsOutline className=" size-5 font-extrabold" />
           </button>
           <span className="w-px h-7 bg-gray-200"></span>
-          <button className="p-3 text-gray-500 flex items-center justify-center transition-all duration-300 hover:text-gray-900">
-            {/* <RiFileExcel2Fill className=" size-5 font-extrabold" /> */}
-            <BsDownload
-              onClick={() => {
-                handleExportForFacilitesSheet();
-              }}
-              className=" size-5 font-extrabold"
-            />
-          </button>
+          {userData.user.isAdmin === true && (
+            <button className="p-3 text-gray-500 flex items-center justify-center transition-all duration-300 hover:text-gray-900">
+              {/* <RiFileExcel2Fill className=" size-5 font-extrabold" /> */}
+              <BsDownload
+                onClick={() => {
+                  handleExportForFacilitesSheet();
+                }}
+                className=" size-5 font-extrabold"
+              />
+            </button>
+          )}
         </div>
         <button
           onClick={props.handleToggle}

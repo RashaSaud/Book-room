@@ -7,7 +7,7 @@ import { appRoutesObj } from "./app.paths";
 import { AuthProvider } from "./auth/user-context";
 import PrivateRoute from "./pages/private-routes";
 import LoginPage from "./pages/projects/login-page";
-
+import ForgetPasswordPage from "./pages/projects/forget-password-page";
 const ExamplePage = React.lazy(() => import("./pages/user/example-page"));
 const NotFoundPage = React.lazy(() => import("./pages/404"));
 
@@ -32,7 +32,7 @@ export function AppRouting() {
             <Route
               key="homepage"
               path={appRoutesObj.getBasePath()}
-              element={withSuspense(<App />)} 
+              element={withSuspense(<App />)}
             />
             <Route
               key="userpage"
@@ -43,6 +43,11 @@ export function AppRouting() {
               key="logInPage"
               path={appRoutesObj.logInPath()}
               element={withSuspense(<LoginPage />)}
+            />
+            <Route
+            key='forgetPassword'
+            path={appRoutesObj.forgetPasswordPath()}
+            element={<ForgetPasswordPage/>}
             />
             <Route
               key="examplePage"

@@ -4,7 +4,6 @@ import * as random from "maath/random";
 import { Suspense, useRef, useState } from "react";
 
 const Stars = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>();
   const [sphere] = useState(() => {
     const positions = random.inSphere(new Float64Array(5000 * 3), {
@@ -20,7 +19,6 @@ const Stars = () => {
   });
 
   return (
-    // eslint-disable-next-line react/no-unknown-property
     <group>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled>
         <PointMaterial

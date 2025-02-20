@@ -10,4 +10,5 @@ export const initialValues: InitialValuesType = {
 export const initialValueUser: InitialValuesUserType = {
   email: "",
   Password: "",
+  isAdmin: false
 };

@@ -65,7 +65,7 @@ export function TabsComponent({
           {tab.notification ? (
             <div className="relative">
               <div
-                className={`absolute h-2 w-2 bottom-2 left-px ${getSizeNotification()} bg-red-600 rounded-full`}
+                className={`absolute h-2 w-2 bottom-2 left-px ${getSizeNotification()}  rounded-full`}
               ></div>
             </div>
           ) : null}

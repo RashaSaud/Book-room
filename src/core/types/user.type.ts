@@ -26,6 +26,7 @@ export type TagsProps = {
 export type InitialValuesUserType = {
   email: string;
   Password: string;
+  isAdmin:boolean
 };
 
 export type InitialValuesType = {

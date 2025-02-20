@@ -42,15 +42,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "commitlint": "commitlint --edit",
-    "precommit": "npx prettier . --write && npx eslint . --fix"
-  },
-  "homepage": "https://github.com/RashaSaud/Book-room",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "commitlint": "commitlint --edit"
   },
   "browserslist": {
     "production": [
@@ -67,13 +59,6 @@
   "devDependencies": {
     "@types/math-random": "^1.0.2",
     "@types/react-router-dom": "^5.3.3",
-    "eslint": "^8.56.0",
-    "eslint-config-semistandard": "^17.0.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
     "gh-pages": "^6.3.0",
     "husky": "^8.0.0",
     "tailwindcss": "^3.2.6",

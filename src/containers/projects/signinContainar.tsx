@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Formik, useFormik } from "formik";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -36,10 +35,16 @@ const SignIn = () => {
   const handleLogin = async () => {
     try {
       loginUser(userCredentials);
+      console.log(userCredentials);
+      
     } catch (error) {
       //
     }
   };
+
+  const forgetPassword = ()=>{
+    navigate('/forget-password')
+  }
   const validationSchema = Yup.object({
     password: Yup.string()
       .min(2, "Too Short!")
@@ -107,11 +112,13 @@ const SignIn = () => {
                 <button
                   onClick={handleLogin}
                   type="submit"
-                  className="bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
+                  className="bg-tertiary border border-white py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"
                 >
-                  Send
+                  Sign in
                 </button>
               </div>
+              <button onClick={forgetPassword}>Forget your password?</button>
+
             </div>
           </Formik>
         </motion.div>

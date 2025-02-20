@@ -31,6 +31,10 @@ class AppRoutes {
   logInPath(): string {
     return "/login";
   }
+
+  forgetPasswordPath():string{
+    return '/forget-password'
+  }
   getExamplePagePath(): string {
     return `/address/:addressId/view`;
   }
