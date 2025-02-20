@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbook_room_template=self.webpackChunkbook_room_template||[]).push([[36],{656:(e,o,t)=>{t.r(o),t.d(o,{default:()=>u});var r=t(496);function u(){return(0,r.jsx)("h1",{children:"Not Found"})}}}]);
+//# sourceMappingURL=36.c741de63.chunk.js.map

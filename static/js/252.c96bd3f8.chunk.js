@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbook_room_template=self.webpackChunkbook_room_template||[]).push([[252],{252:(e,t,o)=>{o.r(t),o.d(t,{default:()=>u});o(60);var r=o(496);function n(){return(0,r.jsx)("div",{})}function u(){return(0,r.jsx)("div",{children:(0,r.jsx)(n,{})})}}}]);
+//# sourceMappingURL=252.c96bd3f8.chunk.js.map

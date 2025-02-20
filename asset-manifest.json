@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/RashaSaud/Book-room/static/css/main.57101377.css",
+    "main.js": "/RashaSaud/Book-room/static/js/main.b68c0ec1.js",
+    "static/js/252.c96bd3f8.chunk.js": "/RashaSaud/Book-room/static/js/252.c96bd3f8.chunk.js",
+    "static/js/36.c741de63.chunk.js": "/RashaSaud/Book-room/static/js/36.c741de63.chunk.js",
+    "static/js/592.63fc51e2.chunk.js": "/RashaSaud/Book-room/static/js/592.63fc51e2.chunk.js",
+    "static/media/Roboto-Regular.ttf": "/RashaSaud/Book-room/static/media/Roboto-Regular.fc2b5060f7accec5cf74.ttf",
+    "static/media/Roboto-Light.ttf": "/RashaSaud/Book-room/static/media/Roboto-Light.333da16a3f3cc391d087.ttf",
+    "static/media/g10.svg": "/RashaSaud/Book-room/static/media/g10.000e25c10b86db801ca3fe7798aa825e.svg",
+    "index.html": "/RashaSaud/Book-room/index.html",
+    "main.57101377.css.map": "/RashaSaud/Book-room/static/css/main.57101377.css.map",
+    "main.b68c0ec1.js.map": "/RashaSaud/Book-room/static/js/main.b68c0ec1.js.map",
+    "252.c96bd3f8.chunk.js.map": "/RashaSaud/Book-room/static/js/252.c96bd3f8.chunk.js.map",
+    "36.c741de63.chunk.js.map": "/RashaSaud/Book-room/static/js/36.c741de63.chunk.js.map",
+    "592.63fc51e2.chunk.js.map": "/RashaSaud/Book-room/static/js/592.63fc51e2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.57101377.css",
+    "static/js/main.b68c0ec1.js"
+  ]
+}

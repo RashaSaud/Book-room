@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/36.c741de63.chunk.js","mappings":"gKAAe,SAASA,IACtB,OAAOC,EAAAA,EAAAA,KAAA,MAAAC,SAAI,aACb,C","sources":["pages/404.tsx"],"sourcesContent":["export default function Custom404(): JSX.Element {\n  return <h1>Not Found</h1>;\n}\n"],"names":["Custom404","_jsx","children"],"sourceRoot":""}
