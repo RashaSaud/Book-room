@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .stepper {
+    position: relative;
+    border-radius: 5px;
+    flex: 100%;
+    /* width: 370px; */
+    padding: 20px 20px 20px 40px;
+  }
+
+  .last {
+    /* height: 78px; */
+    -webkit-clip-path: polygon(20px 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .first {
+    -webkit-clip-path: polygon(
+      0% 0%,
+      calc(100% - 20px) 0%,
+      100% 50%,
+      calc(100% - 20px) 100%,
+      0% 100%
+    );
+  }
+
+  .center3 {
+    position: absolute;
+    height: 78px;
+    clip-path: polygon(
+      18.5px 50%,
+      -0.5% 0%,
+      calc(100% - 20px) 0%,
+      100% 50%,
+      calc(100% - 20px) 100%,
+      -0.5% 100%
+    );
+  }
+
+  .center {
+    position: relative;
+    clip-path: polygon(
+      20px 50%,
+      0% 0%,
+      calc(100% - 20px) 0%,
+      100% 50%,
+      calc(100% - 20px) 100%,
+      0% 100%
+    );
+  }
+  .bg-elliptical-gradient {
+    background: radial-gradient(
+      ellipse at center,
+      #e1b2f2 0%,
+      #a2c3e1 100%,
+      #c1fffb 100%
+    );
+  }
+  @font-face {
+    font-family: "Roboto";
+    src: url("../public/assets/fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Roboto-thin";
+    src: url("../public/assets/fonts/Roboto-Light.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+}
