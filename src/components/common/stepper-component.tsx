@@ -24,14 +24,11 @@ const Stepper = (props: StepperProps) => {
             <div
               className={`${
                 index < 0 ||
-                index < currentStep ||
-                currentStep === props.steps.length - 1
+                index < currentStep || currentStep === props.steps.length - 1
                   ? "bg-amber-500 text-white"
+                  : index === currentStep
+                  ? "bg-amber-400 text-white"
                   : "bg-gray-200 text-gray-600"
-                    ? index === currentStep
-                      ? "bg-amber-400 text-white"
-                      : "bg-gray-200 text-gray-600"
-                    : ""
               }
                   p-2 w-6 h-6 items-center justify-center flex rounded-full cursor-pointer`}
             >

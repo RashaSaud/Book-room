@@ -24,15 +24,11 @@ const StepperCheck = (props: StepperCheckProps) => {
           <div className="flex flex-col w-[30%] min-w-min" key={index}>
             <div
               className={`${
-                index < 0 ||
-                index < currentStep ||
-                currentStep === props.steps.length - 1
+                index < currentStep || currentStep === props.steps.length - 1
                   ? "bg-gray-500 text-white"
+                  : index === currentStep
+                  ? "bg-amber-400 text-white"
                   : "bg-gray-200 text-gray-600"
-                    ? index === currentStep
-                      ? "bg-amber-400 text-white"
-                      : "bg-gray-200 text-gray-600"
-                    : ""
               }
                  h-1 rounded-sm w-full`}
             ></div>
@@ -41,14 +37,12 @@ const StepperCheck = (props: StepperCheckProps) => {
                 <div className="flex w-4 h-4 bg-gray-500 justify-center items-center rounded-full">
                   <BiCheck className="text-white w-9 h-9" />
                 </div>
-              ) : <div></div> ? (
+              ) : (
                 index === currentStep ? (
                   <div className="w-4 h-4 rounded-full border-[5px] border-amber-500"></div>
                 ) : (
                   <div className="w-4 h-4 rounded-full border-gray-400 border-2"></div>
                 )
-              ) : (
-                <div></div>
               )}
               <div className={props.className}>{step}</div>
             </div>

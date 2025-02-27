@@ -14,11 +14,16 @@ const Stars = () => {
   });
 
   useFrame((_state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+    }
+    if (ref.current) {
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
+    // eslint-disable-next-line react/no-unknown-property
     <group>
       <Points ref={ref} positions={sphere} stride={3} frustumCulled>
         <PointMaterial
