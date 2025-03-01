@@ -1,4 +1,3 @@
-import { StarsCanvas } from "src/components/canvas";
 import Navbar from "src/components/navbar";
 import Contact from "src/containers/projects/contactContainar";
 import { styles } from "src/styles";
@@ -9,7 +8,7 @@ export default function ProjectFormPage() {
       <Navbar />
       <div className={`${styles.padding}`}>
         <Contact />
-        <StarsCanvas />
+        {/* <StarsCanvas /> */}
       </div>
     </div>
   );

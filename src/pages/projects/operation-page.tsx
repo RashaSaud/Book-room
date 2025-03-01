@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { StarsCanvas } from "src/components/canvas";
 import Navbar from "src/components/navbar";
 import CalendarContainer from "src/containers/projects/calindarContainer";
 import { staggerContainer } from "src/core/utils/motion";
@@ -18,7 +17,7 @@ export default function OperationPage() {
         <Navbar />
         <div className={`${styles.padding}`}>
           <CalendarContainer />
-          <StarsCanvas />
+          {/* <StarsCanvas /> */}
         </div>
       </div>
     </motion.div>

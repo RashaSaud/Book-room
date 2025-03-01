@@ -27,6 +27,8 @@ const Contact = () => {
   });
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false); // Add loading state
+
   const [status, setStatus] = useState(0);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,8 +48,11 @@ const Contact = () => {
     e.preventDefault();
 
     try {
+      setLoading(true)
       const response = await axios.post(`${baseUrl}/new-book`, formData);
-
+     
+      console.log(loading);
+      
       if (response.status === 201) {
         setMessage("Booking has been Send");
         setStatus(response.status);
@@ -62,7 +67,9 @@ const Contact = () => {
       } else {
         setMessage(String(error));
       }
-    }
+    }finally{
+        setLoading(false)
+      }
   };
   const handleSubmit = async () => {
     try {
@@ -70,7 +77,7 @@ const Contact = () => {
         //
       }
     } catch (error) {
-      handleRequestError(error);
+      // 
     }
     setTimeout(() => {
       alert(JSON.stringify(initialValues, null, 2));
@@ -245,11 +252,12 @@ const Contact = () => {
                 </div>
                 <div className="flex items-center justify-center">
                   <button
+                  disabled={loading}
                     onClick={handleSubmit_}
                     type="submit"
                     className="text-tertiary py-3 px-8 rounded-xl outline-none w-fit bg-white font-bold shadow-md shadow-primary"
                   >
-                    Send
+                    Send 
                   </button>
                 </div>
               </Form>
@@ -262,6 +270,3 @@ const Contact = () => {
 };
 
 export default Contact;
-function handleRequestError(error: unknown) {
-  throw new Error("Function not implemented.");
-}

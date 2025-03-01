@@ -1,18 +1,17 @@
 interface PopUpProps {
-  // Use a more descriptive name
-  showpopUp: boolean;
   event: {
     name: string;
     company: string;
     email: string;
-    isAccepted: string; // Or boolean if that's the actual type
+    isAccepted: boolean; // Change to boolean
     startTime: string;
     endTime: string;
     meetingRoom: string;
     isGround: boolean;
     program: string;
   };
-  onClose: () => void; // Add the onClose prop
+  showpopUp: boolean;
+  onClose: () => void;
 }
 
 function PopUp({ showpopUp, event, onClose }: PopUpProps) {

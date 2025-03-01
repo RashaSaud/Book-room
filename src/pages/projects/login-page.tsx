@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { StarsCanvas } from "src/components/canvas";
 import Navbar from "src/components/navbar";
 import SignIn from "src/containers/projects/signinContainar";
 import { staggerContainer } from "src/core/utils/motion";
@@ -18,7 +17,7 @@ export default function LoginPage() {
         <Navbar />
         <div className={`${styles.padding}`}>
           <SignIn />
-          <StarsCanvas />
+          {/* <StarsCanvas /> */}
         </div>
       </div>
     </motion.div>

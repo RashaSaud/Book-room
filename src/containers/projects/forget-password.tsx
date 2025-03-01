@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
+import Input from "src/components/common/input";
+import { baseUrl } from "src/core/static/static";
 import { slideIn } from "src/core/utils/motion";
 import { styles } from "src/styles";
-import Input from "src/components/common/input";
-import axios from "axios";
 function ForgetPassword() {
   const [userCredentials, setUserCredentials] = useState<any>();
 
@@ -14,16 +15,17 @@ function ForgetPassword() {
   const changePassword = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/change-password`,
+        `${baseUrl}/change-password`,
         userCredentials
       );
       if (response.status === 200) {
-        console.log(response.data);
+        // console.log(response.data);
       }
     } catch (error) {
       //
     }
   };
+
   return (
     <div className="h-screen">
       <div

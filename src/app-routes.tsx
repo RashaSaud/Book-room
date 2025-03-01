@@ -6,8 +6,8 @@ import App from "./App";
 import { appRoutesObj } from "./app.paths";
 import { AuthProvider } from "./auth/user-context";
 import PrivateRoute from "./pages/private-routes";
-import LoginPage from "./pages/projects/login-page";
 import ForgetPasswordPage from "./pages/projects/forget-password-page";
+import LoginPage from "./pages/projects/login-page";
 const ExamplePage = React.lazy(() => import("./pages/user/example-page"));
 const NotFoundPage = React.lazy(() => import("./pages/404"));
 

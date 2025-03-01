@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from  "src/core/static/static";
 interface AuthContextProps {
   isAuthenticated: boolean;
   userData:any
@@ -8,7 +9,6 @@ interface AuthContextProps {
   logoutUser: () => void;
 }
 
-import { baseUrl } from "../core/static/static";
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -18,7 +18,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const navigate = useNavigate();
   const loginUser = async (userCredentials: any) => {
     try {
-      const response = await axios.post(`http://localhost:8000/login`, userCredentials);
+      const response = await axios.post(`${baseUrl}/login`, userCredentials);
       if (response.status === 200) {
         console.log(response.data);
         

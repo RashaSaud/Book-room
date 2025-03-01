@@ -6,7 +6,8 @@ import TaskBarComponent from "src/components/taskBar";
 import { baseUrl } from "src/core/static/static";
 import { slideIn } from "src/core/utils/motion";
 import { styles } from "src/styles";
-import {useAuth} from '../../auth/user-context'
+
+import { useAuth } from "../../auth/user-context";
 const CalendarContainer = () => {
   const { userData } = useAuth();
 
@@ -14,13 +15,11 @@ const CalendarContainer = () => {
   const handleToggle = () => {
     setGround(!Ground);
     console.log(userData.user);
-    
   };
   useEffect(() => {
     const deleteExpiredBookings = async () => {
       try {
         const response = await axios.delete(`${baseUrl}/delete-booking`);
-
       } catch (error) {
         //
       }
@@ -31,7 +30,6 @@ const CalendarContainer = () => {
   }, []);
   return (
     <div className="h-screen">
-
       <div
         className={`xl:mt-32 mobile:mt-32 flex xl:flex-row w-full justify-center items-center flex-col-reverse gap-10 mobile:gap-0`}
       >

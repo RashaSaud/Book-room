@@ -4,14 +4,27 @@ import { useEffect, useState } from "react";
 import { BsDownload } from "react-icons/bs";
 import { HiChevronDown } from "react-icons/hi";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { baseUrl } from "src/core/static/static";
 import { useAuth } from "src/auth/user-context";
+
+
+import { baseUrl } from "../../src/core/static/static";
+
+interface Booking {
+  company: string;
+  meetingRoom: string;
+  program: string;
+  startTime: string;
+  endTime: string;
+  name: string;
+  // ... other properties
+}
+
 interface TaskBarComponentProp {
   handleToggle: () => void;
   Ground: boolean;
 }
 function TaskBarComponent(props: TaskBarComponentProp) {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<Booking[]>([]);
   const { userData } = useAuth();
 
   useEffect(() => {
@@ -52,7 +65,7 @@ function TaskBarComponent(props: TaskBarComponentProp) {
       ]);
     });
 
-    workbook.xlsx.writeBuffer().then((data) => {
+    workbook.xlsx.writeBuffer().then((data:any) => {
       const blob = new Blob([data], {
         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
       });
@@ -121,7 +134,7 @@ function TaskBarComponent(props: TaskBarComponentProp) {
         >
           <button
             onClick={() => {
-              props.handleToggle;
+              props.handleToggle()
             }}
             className={`${
               props.Ground ? "bg-white translate-x-0.5" : "bg-gray-100"
@@ -131,7 +144,7 @@ function TaskBarComponent(props: TaskBarComponentProp) {
           </button>
           <button
             onClick={() => {
-              props.handleToggle;
+              props.handleToggle();
             }}
             className={`${
               props.Ground ? "bg-gray-100" : "bg-white translate-x-0.5"

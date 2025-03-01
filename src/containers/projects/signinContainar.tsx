@@ -11,7 +11,7 @@ import { useAuth } from "../../auth/user-context";
 import { Input } from "../../components/common/input";
 const SignIn = () => {
   const [showPopup, setShowPopup] = useState(false);
-
+const [loading,setLoading]= useState(false)
   const { loginUser } = useAuth();
   const handleSubmit = async () => {
     try {
@@ -34,11 +34,15 @@ const SignIn = () => {
   };
   const handleLogin = async () => {
     try {
+      setLoading(true)
+
       loginUser(userCredentials);
-      console.log(userCredentials);
+      // console.log(userCredentials);
       
     } catch (error) {
       //
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -110,6 +114,7 @@ const SignIn = () => {
               </label>
               <div className="flex items-center justify-center">
                 <button
+                disabled={loading}
                   onClick={handleLogin}
                   type="submit"
                   className="bg-tertiary border border-white py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary"

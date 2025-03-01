@@ -23,15 +23,14 @@ interface Booking {
 }
 export default function CalendarComponent(props: CalendarComponentProps) {
   const [loading, setLoading] = useState(false);
-  const [showPopUp, setShowPopUp] = useState(false); // Initialize as false
-  const [selectedBooking, setSelectedBooking] = useState<Booking | any>(null); // Store the selected booking
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [events, setEvents] = useState<Booking[]>([]);
 
   const colors = ["bg-yallowGarage", "bg-blueGarage", "bg-pinkGarage"];
 
   const getRandomColorClass = (): string => {
     const randomIndex = Math.floor(Math.random() * colors.length);
-
     return colors[randomIndex];
   };
 
@@ -41,7 +40,7 @@ export default function CalendarComponent(props: CalendarComponentProps) {
       const response = await axios.get(`${baseUrl}/get-all-booking`);
       setEvents(response.data);
     } catch (error: any) {
-      //
+      console.error("Error fetching data:", error);
     } finally {
       setLoading(false);
     }
@@ -54,34 +53,39 @@ export default function CalendarComponent(props: CalendarComponentProps) {
   const getBookingById = async (bookingId: string) => {
     try {
       const response = await axios.get(
-        `${baseUrl}/get-booking-by-id/${bookingId}`,
+        `${baseUrl}/get-booking-by-id/${bookingId}`
       );
-      setSelectedBooking(response.data); // Set the selected booking data
-      setShowPopUp(true); // Open the popup after fetching data
+      setSelectedBooking(response.data);
+      setShowPopUp(true);
     } catch (error) {
-      //
+      console.error("Error fetching booking by ID:", error);
     }
   };
 
   const updateBookById = async (id: string, isAccepted: boolean) => {
-    setLoading(true);
     try {
+      // Optimistic Update: Update local state immediately
+      setEvents((prevEvents) =>
+        prevEvents.map((event) =>
+          event._id === id ? { ...event, isAccepted: isAccepted } : event
+        )
+      );
+
+      // Send the update to the server
       await axios.put(`${baseUrl}/accetp-booking/${id}`, { isAccepted });
-      fetchData(); // Refresh the booking list after update
+
+      // Refetch data to reconcile with the server
+      await fetchData();
     } catch (error: any) {
-      if (axios.isAxiosError(error)) {
-        //
-      } else {
-        //
-      }
-    } finally {
-      setLoading(false);
+      console.error("Error updating booking:", error);
+      // Revert the local state if the server update fails (optional)
+      fetchData(); //Revert to server state
     }
   };
 
   const closePopup = () => {
     setShowPopUp(false);
-    setSelectedBooking(null); // Clear selected booking when closing the popup
+    setSelectedBooking(null);
   };
 
   return (
@@ -94,101 +98,90 @@ export default function CalendarComponent(props: CalendarComponentProps) {
             <div className="border w-full h-full border-gray-200 grid grid-cols-9 divide-gray-200 border-b ">
               {events
                 .filter((event) => event.isGround)
-                .map(
-                  (
-                    event,
-                    i, // Use filter for cleaner code
-                  ) => (
-                    <div key={i}>
-                      <div className="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-gray-200">
-                        <span className="text-sm font-medium text-gray-500">
-                          <div
-                            className="mx-2 my-2 cursor-pointer" // Make the div clickable
-                            onClick={() => getBookingById(event._id)}
+                .map((event) => (
+                  <div key={event._id}> {/* Use event._id as key */}
+                    <div className="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-gray-200">
+                      <span className="text-sm font-medium text-gray-500">
+                        <div
+                          className="mx-2 my-2 cursor-pointer"
+                          onClick={() => getBookingById(event._id)}
+                        >
+                          <span
+                            className={`hidden lg:block text-xs font-medium ${getRandomColorClass()} py-2 px-2 size-full text-center rounded-md text-gray-500`}
                           >
-                            <span
-                              className={`hidden lg:block text-xs font-medium ${getRandomColorClass()} py-2 px-2 size-full text-center rounded-md text-gray-500`}
-                            >
-                              <p>Meeting Room Number: {event.meetingRoom}</p>
-                              <p>Start Time: {event.startTime}</p>
-                              <p>End Time: {event.endTime}</p>
-                              <p>Company: {event.company}</p>
-                              {!event.isAccepted && ( // Conditionally render buttons
-                                <div className="grid space-between cursor-pointer grid-cols-2 justify-center">
-                                  <MdCancel
-                                    onClick={() =>
-                                      updateBookById(event._id, false)
-                                    } // Pass false for rejection
-                                    className="w-full my-1 text-3xl cursor-pointer text-red-500 "
-                                  />
-                                  <FaCheck
-                                    onClick={() =>
-                                      updateBookById(event._id, true)
-                                    } // Pass true for acceptance
-                                    className="w-full my-1 text-3xl text-teal-900 cursor-pointer"
-                                  />
-                                </div>
-                              )}
-                            </span>
-                          </div>
-                        </span>
-                      </div>
+                            <p>Meeting Room Number: {event.meetingRoom}</p>
+                            <p>Start Time: {event.startTime}</p>
+                            <p>End Time: {event.endTime}</p>
+                            <p>Company: {event.company}</p>
+                            {!event.isAccepted && (
+                              <div className="grid space-between cursor-pointer grid-cols-2 justify-center">
+                                <MdCancel
+                                  onClick={() =>
+                                    updateBookById(event._id, false)
+                                  }
+                                  className="w-full my-1 text-3xl cursor-pointer text-red-500 "
+                                />
+                                <FaCheck
+                                  onClick={() =>
+                                    updateBookById(event._id, true)
+                                  }
+                                  className="w-full my-1 text-3xl text-teal-900 cursor-pointer"
+                                />
+                              </div>
+                            )}
+                          </span>
+                        </div>
+                      </span>
                     </div>
-                  ),
-                )}
+                  </div>
+                ))}
             </div>
           ) : (
             <div className="border w-full h-full grid grid-cols-5 divide-gray-200 border-b border-gray-200">
               {events
                 .filter((event) => !event.isGround)
-                .map(
-                  (
-                    event,
-                    i, // Use filter for cleaner code
-                  ) => (
-                    <div key={i}>
-                      <div className="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-gray-200">
-                        <span className="text-sm font-medium text-gray-500">
-                          <div
-                            className="mx-2 my-2 cursor-pointer" // Make the div clickable
-                            onClick={() => getBookingById(event._id)}
+                .map((event) => (
+                  <div key={event._id}> {/* Use event._id as key */}
+                    <div className="p-3.5 flex flex-col sm:flex-row items-center justify-between border-r border-gray-200">
+                      <span className="text-sm font-medium text-gray-500">
+                        <div
+                          className="mx-2 my-2 cursor-pointer"
+                          onClick={() => getBookingById(event._id)}
+                        >
+                          <span
+                            className={`hidden lg:block text-xs font-medium ${getRandomColorClass()} py-2 px-2 size-full text-center rounded-md text-gray-500`}
                           >
-                            <span
-                              className={`hidden lg:block text-xs font-medium ${getRandomColorClass()} py-2 px-2 size-full text-center rounded-md text-gray-500`}
-                            >
-                              <p>Meeting Room Number: {event.meetingRoom}</p>
-                              <p>Start Time: {event.startTime}</p>
-                              <p>End Time: {event.endTime}</p>
-                              <p>Company: {event.company}</p>
-                              {!event.isAccepted && ( // Conditionally render buttons
-                                <div className="grid space-between grid-cols-2 justify-center">
-                                  <MdCancel
-                                    onClick={() =>
-                                      updateBookById(event._id, false)
-                                    } // Pass false for rejection
-                                    className="w-full my-1 text-3xl text-red-500 cursor-pointer"
-                                  />
-                                  <FaCheck
-                                    onClick={() =>
-                                      updateBookById(event._id, true)
-                                    } // Pass true for acceptance
-                                    className="w-full my-1 text-3xl text-teal-900 cursor-pointer"
-                                  />
-                                </div>
-                              )}
-                            </span>
-                          </div>
-                        </span>
-                      </div>
+                            <p>Meeting Room Number: {event.meetingRoom}</p>
+                            <p>Start Time: {event.startTime}</p>
+                            <p>End Time: {event.endTime}</p>
+                            <p>Company: {event.company}</p>
+                            {!event.isAccepted && (
+                              <div className="grid space-between grid-cols-2 justify-center">
+                                <MdCancel
+                                  onClick={() =>
+                                    updateBookById(event._id, false)
+                                  }
+                                  className="w-full my-1 text-3xl text-red-500 cursor-pointer"
+                                />
+                                <FaCheck
+                                  onClick={() =>
+                                    updateBookById(event._id, true)
+                                  }
+                                  className="w-full my-1 text-3xl text-teal-900 cursor-pointer"
+                                />
+                              </div>
+                            )}
+                          </span>
+                        </div>
+                      </span>
                     </div>
-                  ),
-                )}
+                  </div>
+                ))}
             </div>
           )}
         </section>
       )}
 
-      {/* Render the popup conditionally */}
       {showPopUp && selectedBooking && (
         <PopUp
           event={selectedBooking}

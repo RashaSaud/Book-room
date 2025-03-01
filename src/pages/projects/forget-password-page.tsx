@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { StarsCanvas } from "src/components/canvas";
 import Navbar from "src/components/navbar";
 import ForgetPassword from "src/containers/projects/forget-password";
 import { staggerContainer } from "src/core/utils/motion";
@@ -18,7 +17,7 @@ export default function ForgetPasswordPage() {
         <Navbar />
         <div className={`${styles.padding}`}>
           <ForgetPassword />
-          <StarsCanvas />
+          {/* <StarsCanvas /> */}
         </div>
       </div>
     </motion.div>
