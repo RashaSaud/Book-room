@@ -180,7 +180,7 @@ export default function CalendarComponent(props: CalendarComponentProps) {
             </div>
           )}
         </section>
-      )}
+      )}    
 
       {showPopUp && selectedBooking && (
         <PopUp
